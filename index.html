@@ -1,0 +1,168 @@
+<html>
+  <head>
+    <title>Index - Go Notes!</title>
+    <link rel="icon" href="img/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"
+      integrity="sha512-+AdxWMqfOdtwMuXK482e5OgHYzN06s97n3NTAeAdTlUvlIgCBx3SUKvMculJIedylDfVCaQFdD6HaojI4aeBUA=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.css"
+      integrity="sha512-+AdxWMqfOdtwMuXK482e5OgHYzN06s97n3NTAeAdTlUvlIgCBx3SUKvMculJIedylDfVCaQFdD6HaojI4aeBUA=="
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.js"
+      integrity="sha512-VYhOmOOgmYsSFb0oxQcqkRrm/YmAnwNcuahdvSfMaQW7JqWb9g6XUciSICYUEOd0C3N+s1fN+Kkn85q+iYsDew=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body class="site">
+    <div class="ui gogreen inverted menu borderless">
+      <a class="item">
+        <img class="ui mini image" src="/img/go_notes.svg" />&emsp;<b
+          >Go Notes</b
+        >
+      </a>
+    </div>
+    {{if not .Links}}
+    <div class="container site-content padded-container">
+      <div class="ui segment padded gogreen-border">
+        <div class="ui grid padded">
+          <div class="sixteen wide column center aligned">
+            <h2>Hello {{.Username}}, Welcome To Go Notes!</h2>
+            <img src="img/go_notes.svg" alt="go_notes" />
+          </div>
+          <div class="ten wide column center-text" style="margin: auto">
+            <p>
+              <b class="gogreen">Go Notes</b> is a simple webserver that is
+              built in <a href="https://golang.org/">golang</a> for storing all
+              your random thoughts during the day or just a reminder to do
+              something. We are not here to do anything fancy, but maybe we will
+              reconsider in the future.
+            </p>
+            <p>
+              As you build out your collection of notes, you will see a list of
+              them populated here on the home page. You can come back here at
+              any time by clicking the <b class="gogreen">Go Notes</b> logo in
+              the top left hand corner of the application.
+            </p>
+            <p>
+              Don't worry if this screen looks different next time you come back
+              here, you've just started to get the hang of things.
+            </p>
+          </div>
+          <div class="fourteen wide column center-text" style="margin: auto">
+            <h3>Creating New Notes</h3>
+            <p>
+              Is very <b><u>easy!</u></b>
+            </p>
+            <p>
+              Follow the steps below to create your first note. You can name it
+              whatever you want.
+            </p>
+            <div class="ui bulleted list">
+              <div class="item">
+                Browse to http://localhost:4646/edit/<em><b>Name</b></em>
+              </div>
+              <div class="item">
+                Fill in the information for your note and click <b>Save</b>
+              </div>
+              <div class="item">You have created your first note!</div>
+            </div>
+          </div>
+          <div class="fourteen wide column center-text" style="margin: auto">
+            <h3>Tell Us Your Name</h3>
+            <p>
+              Let's get to know each other better so that you can be personally
+              greeted next time you come back. You are coming back, right?
+            </p>
+            <!-- Add input for name -->
+          </div>
+        </div>
+      </div>
+      <div class="ui segment padded gogreen-border">
+        <div class="ui grid padded">
+          <div class="sixteen wide column center aligned">
+            <h3>You have not created any notes yet!</h3>
+            <i class="frown outline icon"></i>
+            <p></p>
+            <p>Get started by following the instructions above.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{else}}
+    <div class="container site-content padded-container">
+      <div class="ui segment padded gogreen-border">
+        <div class="ui grid padded">
+          <div class="sixteen wide column center aligned">
+            <h2>Hello {{.Username}}, Welcome Back To Go Notes!</h2>
+            <img src="img/go_notes.svg" alt="go_notes" />
+          </div>
+          <div class="ten wide column center-text" style="margin: auto">
+            <p>
+              <b class="gogreen">Go Notes</b> is a simple webserver that is
+              built in <a href="https://golang.org/">golang</a> for storing all
+              your random thoughts during the day or just a reminder to do
+              something. We are not here to do anything fancy, but maybe we will
+              reconsider in the future.
+            </p>
+          </div>
+          <div class="fourteen wide column center-text" style="margin: auto">
+            <h3>Creating New Notes</h3>
+            <p>As if you need reminding!</p>
+            <p>
+              You can create a new note at any time you like with any name you
+              desire as long as you have not already used it.
+            </p>
+            <p>
+              Add <b>/edit/<i>NewPageName</i></b> to the url you are currently
+              on.
+            </p>
+          </div>
+          <div class="fourteen wide column center-text" style="margin: auto">
+            <h3>Tell Us Your Name</h3>
+            <p>
+              Let's get to know each other better so that you can be personally
+              greeted next time you come back. You are coming back, right?
+            </p>
+            <!-- Add input for name -->
+          </div>
+        </div>
+      </div>
+      <div class="ui segment padded gogreen-border">
+        <div class="ui grid padded">
+          <div class="sixteen wide column center aligned">
+            <h2>Check out your existing notes!</h2>
+          </div>
+          <div class="twelve wide column">
+            {{range .Links}}
+            <p><a href="/view/{{.}}">{{.}}</a></p>
+            {{end}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{end}}
+    <div class="ui gogreen inverted menu borderless one item">
+      <h4 class="item white-text center aligned">
+        <b>Go Notes</b>&thinsp;&thinsp;© {{ .Year }}&thinsp;&thinsp;<b
+          ><a class="footer-link" href="https://github.com/ashscodes">
+            ashscodes</a
+          ></b
+        >
+      </h4>
+    </div>
+  </body>
+</html>

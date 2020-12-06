@@ -1,0 +1,5 @@
+.idea
+client/build/
+client/node_modules/
+*.exe
+*.txt
