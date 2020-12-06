@@ -1,17 +1,13 @@
-# Simple Notes
+# Go Notes
 
-Simple Notes is a React frontend for a Go note taking/wiki application.
+Go Notes is a [golang](https://golang.org/) app that allows the user to store personal notes among other features.
 
-You can check out the Go tutorial for how to build the wiki - [https://golang.org/doc/articles/wiki/](https://golang.org/doc/articles/wiki/)
+The front end is static HTML templates that use [Semantic UI](https://semantic-ui.com/)
 
 ## Go Packages Used
 
-
-
-## React Packages Used
-
-
+TBC
 
 ## Instructions For Use
 
-
+TBC
