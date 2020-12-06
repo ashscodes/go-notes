@@ -55,6 +55,10 @@ img {
   color: rgb(255, 255, 255);
 }
 
+.error {
+  color: red;
+}
+
 .center-text {
   text-align: center;
 }

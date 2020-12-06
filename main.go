@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"html/template"
 	"io/ioutil"
@@ -13,12 +14,18 @@ import (
 	"time"
 )
 
+// AppConfig defines the structure for the json configuration file.
+type AppConfig struct {
+	Username string `json:"username"`
+}
+
 // Index defines the structure of the index page.
 type Index struct {
 	Title    string
 	Links    []string
 	Year     int
 	Username string
+	Errors   map[string]string
 }
 
 // Page defines the structure of our data for a page.
@@ -27,6 +34,10 @@ type Page struct {
 	Body  []byte
 }
 
+var appConfig *AppConfig
+var appConfigFile = "appConfig.json"
+var currentYear = time.Now().Year()
+var fileList []string
 var templates = template.Must(template.ParseFiles("edit.html", "index.html", "view.html"))
 var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 
@@ -76,6 +87,35 @@ func loadPage(title string) (*Page, error) {
 	return &Page{Title: title, Body: body}, nil
 }
 
+// loadAppConfig returns the app configuation file.
+func loadAppConfig() error {
+	config, err := ioutil.ReadFile(appConfigFile)
+	if err != nil {
+		return err
+	}
+	err = json.Unmarshal([]byte(config), &appConfig)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// updateAppConfig updates the app configuration file.
+func updateAppConfig(newConfig *AppConfig) {
+	if appConfig == nil {
+		err := loadAppConfig()
+		if err != nil {
+			log.Fatal("Could not load the app configuration.")
+		}
+	}
+	appConfig.Username = newConfig.Username
+	jsonString, err := json.Marshal(appConfig)
+	if err != nil {
+		fmt.Println(err)
+	}
+	ioutil.WriteFile(appConfigFile, jsonString, 0600)
+}
+
 // savePage is a function that saves a new page to text file.
 func (p *Page) savePage() error {
 	filename := p.Title + ".txt"
@@ -98,10 +138,29 @@ func faviconHandler(w http.ResponseWriter, r *http.Request) {
 
 // listHandler displays a list of browsable pages on the root page.
 func listHandler(w http.ResponseWriter, r *http.Request) {
-	fileList := buildIndex(".txt")
-	currentYear := time.Now().Year()
-	i := &Index{Title: "Index", Links: fileList, Year: currentYear, Username: "User"}
-	renderTemplate(w, "index", i)
+	switch r.Method {
+	case "GET":
+		fileList = buildIndex(".txt")
+		i := &Index{Title: "Index", Links: fileList, Year: currentYear, Username: appConfig.Username}
+		renderTemplate(w, "index", i)
+	case "POST":
+		r.ParseForm()
+		username := r.Form["username"][0]
+		if len(username) > 0 {
+			var newConfig *AppConfig
+			newConfig = new(AppConfig)
+			newConfig.Username = username
+			updateAppConfig(newConfig)
+			http.Redirect(w, r, "/", http.StatusFound)
+		} else {
+			i := &Index{Title: "Index", Links: fileList, Year: currentYear, Username: appConfig.Username}
+			i.Errors = make(map[string]string)
+			i.Errors["Username"] = "Please enter a username."
+			renderTemplate(w, "index", i)
+		}
+	default:
+		http.Redirect(w, r, "/", http.StatusFound)
+	}
 }
 
 // saveHandler handles the submission of forms that have are edited.
@@ -124,6 +183,17 @@ func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 		return
 	}
 	renderTemplate(w, "view", p)
+}
+
+func init() {
+	err := loadAppConfig()
+	if err != nil {
+		var newConfig *AppConfig
+		newConfig = new(AppConfig)
+		newConfig.Username = "User"
+		appConfig = newConfig
+		updateAppConfig(newConfig)
+	}
 }
 
 func main() {

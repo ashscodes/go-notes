@@ -29,7 +29,7 @@
   </head>
   <body class="site">
     <div class="ui gogreen inverted menu borderless">
-      <a class="item">
+      <a class="item" href="/">
         <img class="ui mini image" src="/img/go_notes.svg" />&emsp;<b
           >Go Notes</b
         >
@@ -82,12 +82,46 @@
             </div>
           </div>
           <div class="fourteen wide column center-text" style="margin: auto">
+            {{ if eq .Username "User" }}
             <h3>Tell Us Your Name</h3>
             <p>
               Let's get to know each other better so that you can be personally
               greeted next time you come back. You are coming back, right?
             </p>
-            <!-- Add input for name -->
+            {{ else }}
+            <h3>Want To Change Your Name?</h3>
+            <p>
+              {{ .Username }}, you came back! We're so happy, we love working
+              with you. For whatever the reason, as always, if you're unhappy
+              with your current name, you can set it below.
+            </p>
+            {{ end }}
+          </div>
+          <div class="eight wide column centered grid center-text">
+            <form class="ui form" action="/" method="POST">
+              {{ if .Errors.Username }}
+              <div class="sixteen wide field error">
+                <label for="username">Your Name</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  maxlength="12"
+                />
+                <p class="error">{{ .Errors.Username }}</p>
+              </div>
+              {{ else }}
+              <div class="sixteen wide field">
+                <label for="username">Your Name</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  maxlength="12"
+                />
+              </div>
+              {{ end }}
+            </form>
           </div>
         </div>
       </div>
@@ -107,7 +141,7 @@
       <div class="ui segment padded gogreen-border">
         <div class="ui grid padded">
           <div class="sixteen wide column center aligned">
-            <h2>Hello {{.Username}}, Welcome Back To Go Notes!</h2>
+            <h2>Hey {{.Username}}, Welcome Back To Go Notes!</h2>
             <img src="img/go_notes.svg" alt="go_notes" />
           </div>
           <div class="ten wide column center-text" style="margin: auto">
@@ -132,12 +166,46 @@
             </p>
           </div>
           <div class="fourteen wide column center-text" style="margin: auto">
+            {{ if eq .Username "User" }}
             <h3>Tell Us Your Name</h3>
             <p>
               Let's get to know each other better so that you can be personally
               greeted next time you come back. You are coming back, right?
             </p>
-            <!-- Add input for name -->
+            {{ else }}
+            <h3>Want To Change Your Name?</h3>
+            <p>
+              {{ .Username }}, you came back! We're so happy, we love working
+              with you. For whatever the reason, as always, if you're unhappy
+              with your current name, you can set it below.
+            </p>
+            {{ end }}
+          </div>
+          <div class="eight wide column centered grid center-text">
+            <form class="ui form" action="/" method="POST">
+              {{ if .Errors.Username }}
+              <div class="sixteen wide field error">
+                <label for="username">Your Name</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  maxlength="12"
+                />
+                <p class="error">{{ .Errors.Username }}</p>
+              </div>
+              {{ else }}
+              <div class="sixteen wide field">
+                <label for="username">Your Name</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  maxlength="12"
+                />
+              </div>
+              {{ end }}
+            </form>
           </div>
         </div>
       </div>
@@ -149,6 +217,7 @@
           <div class="twelve wide column">
             {{range .Links}}
             <p><a href="/view/{{.}}">{{.}}</a></p>
+            <!-- Add cards or something cool to display the notes. -->
             {{end}}
           </div>
         </div>
