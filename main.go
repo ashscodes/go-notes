@@ -36,15 +36,16 @@ type Page struct {
 
 var appConfig *AppConfig
 var appConfigFile = "appConfig.json"
+var currentDir string
 var currentYear = time.Now().Year()
 var fileList []string
-var templates = template.Must(template.ParseFiles("edit.html", "index.html", "view.html"))
+var templates = template.Must(template.ParseGlob("tmpl/*.html"))
 var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
 
 // buildIndex creates a list of files in the current directory for the Index page.
 func buildIndex(ext string) []string {
 	var files []string
-	filepath.Walk(".", func(path string, f os.FileInfo, _ error) error {
+	filepath.Walk("docs/", func(path string, f os.FileInfo, _ error) error {
 		if !f.IsDir() {
 			if filepath.Ext(path) == ext {
 				files = append(files, strings.TrimSuffix(f.Name(), ext))
@@ -77,7 +78,7 @@ func renderTemplate(w http.ResponseWriter, tmpl string, i interface{}) {
 
 // loadPage returns a page to the application from a text file.
 func loadPage(title string) (*Page, error) {
-	filename := title + ".txt"
+	filename := "docs/" + title + ".txt"
 	body, err := ioutil.ReadFile(filename)
 
 	// If there is an issue with reading the file.
@@ -118,7 +119,7 @@ func updateAppConfig(newConfig *AppConfig) {
 
 // savePage is a function that saves a new page to text file.
 func (p *Page) savePage() error {
-	filename := p.Title + ".txt"
+	filename := "docs/" + p.Title + ".txt"
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
@@ -186,6 +187,12 @@ func viewHandler(w http.ResponseWriter, r *http.Request, title string) {
 }
 
 func init() {
+	// If the docs folder doesn't exist, we need to create it.
+	if _, err := os.Stat("docs"); os.IsNotExist(err) {
+		os.Mkdir("docs", 0777)
+	}
+
+	// If there isn't an appConfig.json, we should create a new one.
 	err := loadAppConfig()
 	if err != nil {
 		var newConfig *AppConfig

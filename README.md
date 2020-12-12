@@ -2,7 +2,7 @@
 
 Go Notes is a [Go](https://golang.org/) app that allows the user to store personal notes among other features.
 
-I built this to learn how to do a number of things in Go.
+I built this to learn how to do a number of things in Go. Let me know if I am doing something wrong.
 
 The front end is static HTML templates that use [Semantic UI](https://semantic-ui.com/)
 
