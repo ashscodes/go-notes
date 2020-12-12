@@ -1,5 +1,7 @@
 .idea
+appConfig.json
 client/build/
 client/node_modules/
+docs/
 *.exe
 *.txt
