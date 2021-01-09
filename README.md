@@ -6,6 +6,8 @@ I built this to learn how to do a number of things in Go. Let me know if I am do
 
 The front end is static HTML templates that use [Semantic UI](https://semantic-ui.com/)
 
+This project is a work in progress.
+
 ## Go Packages Used
 
 encoding/json, fmt, html/template, io/ioutil, log, net/http, os, path/filepath, regexp, strings, time
@@ -29,6 +31,16 @@ Navigate to [http://localhost:4646](http://localhost:4646) and follow the instru
 ### Installing Go
 
 [Download Go for your system.](https://golang.org/dl/)
+
+## Immediate Worklist
+
+- Expand HTML templates for Edit and View pages.
+
+- Add an notes index page.
+
+- Add the ability to delete notes.
+
+- Refactor main.go.
 
 ## Future Plans
 
