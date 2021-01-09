@@ -1,0 +1,22 @@
+h1.ui.header .sub.header {
+  font-size: 1.8rem;
+  padding: 10px;
+  color: rgb(255, 255, 255) !important;
+  line-height: 3rem;
+  font-family: "Roboto", sans-serif;
+}
+
+h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem;
+}
+
+h4 {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+}

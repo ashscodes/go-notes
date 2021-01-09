@@ -35,12 +35,12 @@ type Page struct {
 }
 
 var appConfig *AppConfig
-var appConfigFile = "appConfig.json"
+var appConfigFile = "app-config.json"
 var currentDir string
 var currentYear = time.Now().Year()
 var fileList []string
 var templates = template.Must(template.ParseGlob("tmpl/*.html"))
-var validPath = regexp.MustCompile("^/(edit|save|view)/([a-zA-Z0-9]+)$")
+var validPath = regexp.MustCompile("^/(edit|save|view)/([A-Za-z-]*)$")
 
 // buildIndex creates a list of files in the current directory for the Index page.
 func buildIndex(ext string) []string {
@@ -192,12 +192,12 @@ func init() {
 		os.Mkdir("docs", 0777)
 	}
 
-	// If there isn't an appConfig.json, we should create a new one.
+	// If there isn't an app-config.json, we should create a new one.
 	err := loadAppConfig()
 	if err != nil {
 		var newConfig *AppConfig
 		newConfig = new(AppConfig)
-		newConfig.Username = "User"
+		newConfig.Username = "New User"
 		appConfig = newConfig
 		updateAppConfig(newConfig)
 	}
@@ -210,8 +210,7 @@ func main() {
 	http.HandleFunc("/save/", makeHandler(saveHandler))
 	http.HandleFunc("/view/", makeHandler(viewHandler))
 
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
-	http.Handle("/img/", http.StripPrefix("/img/", http.FileServer(http.Dir("img"))))
+	http.Handle("/assets/", http.StripPrefix("/assets", http.FileServer(http.Dir("assets"))))
 
 	fmt.Println("Server running on http://localhost:4646/")
 	fmt.Println("Press 'CTRL+C' to stop the server.")

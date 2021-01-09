@@ -1,0 +1,21 @@
+.footer-link {
+  color: rgb(255, 255, 255);
+}
+
+.gogreen {
+  color: rgb(41, 190, 176) !important;
+}
+
+.gogreen-border {
+  border-top: 2px solid rgb(41, 190, 176) !important;
+}
+
+.gogreen-button {
+  background-color: rgb(41, 190, 176) !important;
+  color: rgb(255, 255, 255) !important;
+}
+
+.gogreen-button-dark {
+  color: rgb(41, 190, 176) !important;
+  background-color: rgb(0, 0, 0) !important;
+}

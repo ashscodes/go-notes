@@ -1,0 +1,48 @@
+.ui.card {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem !important;
+  line-height: 3rem;
+  min-width: 200px;
+}
+
+@media (min-width: 768px) {
+  .ui.card {
+    min-width: 350px;
+  }
+}
+
+.ui.grid {
+  line-height: 1.5rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5rem;
+}
+
+.ui.icon.header .content {
+  font-size: 3rem;
+  padding: 20px;
+  line-height: 3rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.ui.inverted.gogreen.segment {
+  background-color: rgb(41, 190, 176);
+  color: rgb(255, 255, 255);
+}
+
+.ui.inverted.menu .gogreen.active.item,
+.ui.inverted.gogreen.menu {
+  background-color: rgb(41, 190, 176);
+  color: rgb(255, 255, 255);
+}
+
+.ui.menu {
+  border-radius: 0px !important;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+}
+
+.ui.segment {
+  margin-top: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
